@@ -35,6 +35,8 @@ h1, h2, h3 { font-family: var(--serif); color: var(--vino); }
   transition: transform .15s;
 }
 .btn:active { transform: scale(.96); }
+.btn-soft { display: block; margin: 14px auto 0; background: var(--crema); color: var(--vino); box-shadow: none; border: 1.5px solid var(--rosa-suave); }
+.btn-soft[hidden] { display: none; }
 
 /* Inicio */
 .welcome { text-align: center; padding-top: 40px; }

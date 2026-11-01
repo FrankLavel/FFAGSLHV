@@ -165,6 +165,25 @@ for (let i = 0; i < 12; i++) {
   $('#petals').append(p);
 }
 
+/* Botón de instalación: Chrome/Android usa el aviso nativo; iPhone necesita instrucciones */
+const installBtn = $('#install');
+let installPrompt = null;
+const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+installBtn.hidden = standalone;
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; });
+addEventListener('appinstalled', () => { installBtn.hidden = true; });
+installBtn.onclick = async () => {
+  if (installPrompt) {
+    installPrompt.prompt();
+    if ((await installPrompt.userChoice).outcome === 'accepted') installBtn.hidden = true;
+    installPrompt = null;
+  } else if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
+    show('<h3>📲 Instalar en tu iPhone</h3><p>1. Abre esta página en <b>Safari</b>.\n2. Toca el botón <b>Compartir</b> (el cuadrito con la flecha hacia arriba).\n3. Elige <b>«Agregar a inicio»</b>.\n\n¡Y listo! Tendrás tu pequeño mundo a un toque. ♡</p>');
+  } else {
+    show('<h3>📲 Instalar en tu celular</h3><p>1. Abre esta página en <b>Chrome</b>.\n2. Toca el menú <b>⋮</b> (arriba a la derecha).\n3. Elige <b>«Instalar app»</b> o <b>«Agregar a pantalla de inicio»</b>.\n\n¡Y listo! Tendrás tu pequeño mundo a un toque. ♡</p>');
+  }
+};
+
 setStage(0);
 refresh();
 if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js');
