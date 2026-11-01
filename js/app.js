@@ -166,21 +166,39 @@ for (let i = 0; i < 12; i++) {
 }
 
 /* Botón de instalación: Chrome/Android usa el aviso nativo; iPhone necesita instrucciones */
-const installBtn = $('#install');
+const installCard = $('#install');
 let installPrompt = null;
-const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
-installBtn.hidden = standalone;
+installCard.hidden = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
 addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; });
-addEventListener('appinstalled', () => { installBtn.hidden = true; });
-installBtn.onclick = async () => {
+addEventListener('appinstalled', () => { installCard.hidden = true; });
+
+const ICON = {
+  share: '<path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11v9h12v-9"/>',
+  plus: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/>',
+  dots: '<circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/>',
+  phone: '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>'
+};
+const ico = name => `<span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[name]}</svg></span>`;
+const steps = (title, items) => show(`<h3>${title}</h3><ol class="steps">${items.map(s => `<li><span>${s}</span></li>`).join('')}</ol>
+  <p class="steps-note">El ícono aparecerá en tu pantalla de inicio y se abrirá como una app.</p>`);
+
+$('#install-btn').onclick = async () => {
   if (installPrompt) {
     installPrompt.prompt();
-    if ((await installPrompt.userChoice).outcome === 'accepted') installBtn.hidden = true;
+    if ((await installPrompt.userChoice).outcome === 'accepted') installCard.hidden = true;
     installPrompt = null;
   } else if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
-    show('<h3>📲 Instalar en tu iPhone</h3><p>1. Abre esta página en <b>Safari</b>.\n2. Toca el botón <b>Compartir</b> (el cuadrito con la flecha hacia arriba).\n3. Elige <b>«Agregar a inicio»</b>.\n\n¡Y listo! Tendrás tu pequeño mundo a un toque. ♡</p>');
+    steps('Instalar en iPhone', [
+      'Abre esta página en <b>Safari</b>.',
+      `Toca ${ico('share')} <b>Compartir</b> en la barra inferior.`,
+      `Elige ${ico('plus')} <b>Agregar a inicio</b> y confirma.`
+    ]);
   } else {
-    show('<h3>📲 Instalar en tu celular</h3><p>1. Abre esta página en <b>Chrome</b>.\n2. Toca el menú <b>⋮</b> (arriba a la derecha).\n3. Elige <b>«Instalar app»</b> o <b>«Agregar a pantalla de inicio»</b>.\n\n¡Y listo! Tendrás tu pequeño mundo a un toque. ♡</p>');
+    steps('Instalar en Android', [
+      'Abre esta página en <b>Chrome</b>.',
+      `Toca el menú ${ico('dots')} arriba a la derecha.`,
+      `Elige ${ico('phone')} <b>Instalar app</b> o <b>Agregar a pantalla de inicio</b>.`
+    ]);
   }
 };
 

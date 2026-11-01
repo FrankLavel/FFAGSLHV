@@ -1,5 +1,5 @@
 // Cambia la versión cuando edites contenido para que el celular descargue lo nuevo.
-const CACHE = 'cartitas-v4';
+const CACHE = 'cartitas-v5';
 const FILES = ['./', 'index.html', 'css/styles.css', 'js/data.js', 'js/app.js', 'manifest.json',
   'assets/icons/icon-192.png', 'assets/icons/icon-512.png'];
 
