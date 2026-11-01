@@ -3,118 +3,155 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#762D42">
+  <meta name="theme-color" content="#5A1F31">
+  <meta name="description" content="Un pequeño mundo hecho especialmente para Aixel">
   <title>Cartitas para ti</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="assets/icons/icon-192.png">
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Dancing+Script:wght@500;700&family=Nunito:wght@400;600&display=swap">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <!-- Intro: sobre sellado -->
+  <div id="intro" class="intro" hidden>
+    <p class="intro-to">Para Aixel</p>
+    <div class="env env-big" id="intro-env">
+      <i class="env-inside"></i>
+      <div class="peek"><span>Hola, Chaparra</span><i></i><i></i><i></i></div>
+      <i class="env-front"></i>
+      <i class="env-flap"></i>
+      <button class="seal" id="intro-seal" aria-label="Abrir el sobre"></button>
+    </div>
+    <p class="intro-hint">Toca el sello para abrir</p>
+  </div>
+
   <div id="petals" aria-hidden="true"></div>
 
   <main>
     <!-- Inicio -->
     <section id="inicio" class="view active">
-      <div class="paper welcome">
-        <div class="seal">♡</div>
+      <div class="brand"><span class="mono" aria-hidden="true">A</span>Cartitas para ti</div>
+      <div class="hero">
+        <p class="eyebrow">Un pequeño mundo hecho para ti</p>
         <h1 id="w-title"></h1>
-        <p id="w-text"></p>
-        <p class="hand" id="w-q"></p>
-        <button class="btn" data-go="cartitas">Abrir mi pequeño mundo</button>
+        <div class="orn" aria-hidden="true"></div>
+        <p class="lede" id="w-text"></p>
+        <p class="script" id="w-q"></p>
+        <button class="btn" data-go="cartitas">Abrir mis cartitas <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
-      <div class="paper install-card" id="install" hidden>
-        <img src="assets/icons/icon-192.png" alt="" width="56" height="56">
+
+      <h2 class="label">Tu recorrido</h2>
+      <div class="rings" id="progress"></div>
+
+      <div class="card install-card" id="install" hidden>
+        <img src="assets/icons/icon-192.png" alt="" width="52" height="52">
         <div>
-          <strong>Cartitas para ti</strong>
-          <span>Tenla en tu celular, incluso sin internet</span>
+          <strong>Llévala contigo</strong>
+          <span>Instálala en tu celular y ábrela cuando quieras, incluso sin internet.</span>
         </div>
         <button class="btn btn-sm" id="install-btn">Instalar</button>
       </div>
-      <div class="paper progress-card">
-        <h2>Lo que has descubierto</h2>
-        <ul id="progress"></ul>
-      </div>
+
+      <p class="foot">Hecho a mano, con todo el cariño, para Aixel</p>
     </section>
 
     <!-- Cartitas -->
     <section id="cartitas" class="view">
-      <h2 class="title">Cartitas</h2>
-      <p class="sub hand">Ábrelas cuando las necesites</p>
-      <div id="letters" class="grid"></div>
+      <header class="sec-head">
+        <p class="eyebrow">Capítulo I</p>
+        <h2>Cartitas</h2>
+        <div class="orn" aria-hidden="true"></div>
+        <p class="lede">Cada sobre guarda algo para un momento distinto. Ábrelos cuando los necesites.</p>
+      </header>
+      <div id="letters" class="letters"></div>
     </section>
 
     <!-- Recuerdos -->
     <section id="recuerdos" class="view">
-      <h2 class="title">Recuerdos</h2>
-      <p class="sub hand">Nuestra galería</p>
-      <div id="gallery" class="grid"></div>
+      <header class="sec-head">
+        <p class="eyebrow">Capítulo II</p>
+        <h2>Recuerdos</h2>
+        <div class="orn" aria-hidden="true"></div>
+        <p class="lede">Nuestra pequeña galería.</p>
+      </header>
+      <div id="gallery" class="gallery"></div>
     </section>
 
     <!-- Jardín -->
     <section id="jardin" class="view">
-      <h2 class="title">Nuestro jardín</h2>
-      <p class="sub hand" id="garden-hint">Toca la tierra para plantar una semilla</p>
-      <button id="pot" class="pot" aria-label="Maceta">
-        <svg viewBox="0 0 200 240" aria-hidden="true">
-          <g id="plant">
-            <path class="stem" d="M100 170 C 96 140, 104 120, 100 80" />
-            <g transform="rotate(-30 88 140)"><ellipse class="leaf" cx="86" cy="140" rx="14" ry="6" /></g>
-            <g transform="rotate(30 112 120)"><ellipse class="leaf" cx="114" cy="120" rx="14" ry="6" /></g>
-            <g class="bloom">
-              <circle cx="100" cy="62" r="13" /><circle cx="118" cy="76" r="13" /><circle cx="111" cy="97" r="13" />
-              <circle cx="89" cy="97" r="13" /><circle cx="82" cy="76" r="13" />
-              <circle class="center" cx="100" cy="80" r="9" />
-            </g>
-            <ellipse class="seed" cx="100" cy="168" rx="6" ry="4" />
-          </g>
-          <path class="soil" d="M45 165 Q100 152 155 165 L155 172 L45 172 Z" />
-          <path class="clay" d="M40 170 H160 L148 232 H52 Z" />
-          <rect class="clay rim" x="34" y="160" width="132" height="16" rx="6" />
-        </svg>
-      </button>
-      <div id="flowerbed" class="flowerbed"></div>
+      <header class="sec-head">
+        <p class="eyebrow">Capítulo III</p>
+        <h2>Nuestro jardín</h2>
+        <div class="orn" aria-hidden="true"></div>
+        <p class="lede">Cada flor que crece guarda una razón por la que te quiero.</p>
+      </header>
+      <div class="garden">
+        <button id="pot" class="pot" aria-label="Maceta"></button>
+        <div class="stage-dots" id="stage-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="garden-hint" id="garden-hint"></p>
+      </div>
+      <h2 class="label">Tu herbario</h2>
+      <div id="flowerbed" class="herbario"></div>
     </section>
 
     <!-- Historia -->
     <section id="historia" class="view">
-      <h2 class="title">Nuestra historia</h2>
-      <p class="sub hand">Capítulo a capítulo</p>
+      <header class="sec-head">
+        <p class="eyebrow">Capítulo IV</p>
+        <h2>Nuestra historia</h2>
+        <div class="orn" aria-hidden="true"></div>
+        <p class="lede">Capítulo a capítulo.</p>
+      </header>
       <ol id="timeline" class="timeline"></ol>
     </section>
 
     <!-- Sorpresa -->
     <section id="sorpresa" class="view">
-      <h2 class="title">La sorpresa</h2>
-      <div id="locked" class="paper">
-        <div class="lock">🔒</div>
-        <p>Esta sección se abrirá cuando completes estos pequeños retos:</p>
-        <ul id="goals"></ul>
-        <div id="game" class="game" hidden>
-          <p class="hand">Atrapa los corazones antes de que se escapen</p>
+      <header class="sec-head">
+        <p class="eyebrow">Capítulo final</p>
+        <h2>La sorpresa</h2>
+        <div class="orn" aria-hidden="true"></div>
+      </header>
+      <div id="locked">
+        <div class="card vault">
+          <div class="vault-seal" id="vault-seal"></div>
+          <p class="lede">Esta carta se abrirá cuando completes estos pequeños retos.</p>
+          <ul id="goals" class="goals"></ul>
+        </div>
+        <div id="game" class="card game" hidden>
+          <p class="eyebrow">Último reto</p>
+          <h3>Atrapa los corazones</h3>
+          <p class="lede">Tócalos antes de que se escapen.</p>
           <div id="arena" class="arena"><button class="btn" id="start-game">Empezar</button></div>
         </div>
       </div>
-      <article id="secret" class="paper letter-paper" hidden>
+      <article id="secret" class="sheet secret" hidden>
         <h3 id="s-title"></h3>
+        <div class="orn" aria-hidden="true"></div>
         <div id="s-text"></div>
-        <p class="hand sign" id="s-sign"></p>
+        <p class="sign" id="s-sign"></p>
       </article>
     </section>
   </main>
 
-  <nav class="tabs">
-    <button data-go="inicio" class="on"><span>🏠</span>Inicio</button>
-    <button data-go="cartitas"><span>💌</span>Cartitas</button>
-    <button data-go="recuerdos"><span>📷</span>Recuerdos</button>
-    <button data-go="jardin"><span>🌷</span>Jardín</button>
-    <button data-go="historia"><span>📖</span>Historia</button>
-    <button data-go="sorpresa"><span>🎁</span>Sorpresa</button>
+  <nav class="tabs" aria-label="Secciones">
+    <button data-go="inicio" class="on"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20h-5v-5.5H9V20H4z"/></svg>Inicio</button>
+    <button data-go="cartitas"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>Cartitas</button>
+    <button data-go="recuerdos"><svg viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="2"/><circle cx="9" cy="9.5" r="1.8"/><path d="m20.5 15.5-5-5L6 20"/></svg>Recuerdos</button>
+    <button data-go="jardin"><svg viewBox="0 0 24 24"><path d="M12 21v-8.5"/><path d="M7.5 4.5c0 4.5 2 7 4.5 8 2.5-1 4.5-3.5 4.5-8L14 6.5 12 3.5l-2 3z"/><path d="M12 17.5c-1.5-2-3.5-2.5-5.5-2.5.5 2 2.5 3.5 5.5 2.5zm0 0c1.5-2 3.5-2.5 5.5-2.5-.5 2-2.5 3.5-5.5 2.5z"/></svg>Jardín</button>
+    <button data-go="historia"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13.5c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zm0 0V20"/></svg>Historia</button>
+    <button data-go="sorpresa"><svg viewBox="0 0 24 24"><rect x="3.5" y="8.5" width="17" height="4" rx="1"/><path d="M5 12.5V20h14v-7.5M12 8.5V20M12 8.5C10.5 5 6.5 4.5 6.5 7c0 1.5 2.5 1.5 5.5 1.5zm0 0c1.5-3.5 5.5-4 5.5-1.5 0 1.5-2.5 1.5-5.5 1.5z"/></svg>Sorpresa</button>
   </nav>
 
-  <dialog id="modal"><button class="close" aria-label="Cerrar">×</button><div id="modal-body"></div></dialog>
+  <dialog id="modal">
+    <button class="close" aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div id="modal-body"></div>
+  </dialog>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
